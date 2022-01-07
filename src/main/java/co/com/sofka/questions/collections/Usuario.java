@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Usuario {
     @Id
     private String id;
+    private String uid;
     private String nombre;
     private String apellido;
     private String path;
@@ -14,8 +15,9 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String id, String nombre, String apellido, String path) {
+    public Usuario(String id, String uid, String nombre, String apellido, String path) {
         this.id = id;
+        this.uid = uid;
         this.nombre = nombre;
         this.apellido = apellido;
         this.path = path;
@@ -27,6 +29,14 @@ public class Usuario {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getNombre() {

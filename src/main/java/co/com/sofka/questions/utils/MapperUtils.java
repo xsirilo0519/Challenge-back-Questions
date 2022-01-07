@@ -2,8 +2,10 @@ package co.com.sofka.questions.utils;
 
 import co.com.sofka.questions.collections.Answer;
 import co.com.sofka.questions.collections.Question;
+import co.com.sofka.questions.collections.Usuario;
 import co.com.sofka.questions.model.AnswerDTO;
 import co.com.sofka.questions.model.QuestionDTO;
+import co.com.sofka.questions.model.UsuarioDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
@@ -52,4 +54,28 @@ public class MapperUtils {
                 entity.getAnswer()
         );
     }
+
+    public Function<UsuarioDTO, Usuario> mapperToUsuario(String id) {
+        return usuarioDTO -> {
+            var usuario = new Usuario();
+            usuario.setId(id);
+            usuario.setUid(usuarioDTO.getUid());
+            usuario.setApellido(usuarioDTO.getApellido());
+            usuario.setNombre(usuarioDTO.getNombre());
+            usuario.setPath(usuarioDTO.getPath());
+            return usuario;
+        };
+    }
+
+    public Function<Usuario, UsuarioDTO> mapperToUsuarioDTO() {
+        return usuario -> new UsuarioDTO(
+                usuario.getId(),
+                usuario.getUid(),
+                usuario.getApellido(),
+                usuario.getNombre(),
+                usuario.getPath()
+        );
+    }
+
+
 }

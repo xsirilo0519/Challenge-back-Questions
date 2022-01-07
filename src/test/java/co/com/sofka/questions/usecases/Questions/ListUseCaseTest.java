@@ -1,8 +1,7 @@
 package co.com.sofka.questions.usecases.Questions;
 
 import co.com.sofka.questions.collections.Question;
-import co.com.sofka.questions.reposioties.QuestionRepository;
-import co.com.sofka.questions.usecases.Questions.ListUseCase;
+import co.com.sofka.questions.repositories.QuestionRepository;
 import co.com.sofka.questions.utils.Category;
 import co.com.sofka.questions.utils.MapperUtils;
 import co.com.sofka.questions.utils.Type;
