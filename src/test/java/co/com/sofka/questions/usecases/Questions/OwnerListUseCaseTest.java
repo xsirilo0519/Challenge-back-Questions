@@ -1,39 +1,35 @@
-package co.com.sofka.questions.usecases;
+package co.com.sofka.questions.usecases.Questions;
 
 import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.reposioties.QuestionRepository;
+import co.com.sofka.questions.usecases.Questions.OwnerListUseCase;
 import co.com.sofka.questions.utils.Category;
+import co.com.sofka.questions.utils.MapperUtils;
 import co.com.sofka.questions.utils.Type;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-class FindAllByCategoryUseCaseTest {
+class OwnerListUseCaseTest {
 
-    @MockBean
     QuestionRepository repository;
-
-    @SpyBean
-    FindAllByCategoryUseCase useCase;
+    OwnerListUseCase ownerListUseCase;
 
     @BeforeEach
     public void setup(){
         MapperUtils mapperUtils = new MapperUtils();
         repository = mock(QuestionRepository.class);
-        useCase = new FindAllByCategoryUseCase(mapperUtils, repository);
+        ownerListUseCase = new OwnerListUseCase(mapperUtils, repository);
     }
 
     @Test
-    void findAllByCategoryListTest() {
+    void getQuestionOwnerListTest() {
 
         var question = new Question("11",
                 "xxxx",
@@ -41,9 +37,9 @@ class FindAllByCategoryUseCaseTest {
                 Type.OPEN,
                 Category.SCIENCES);
 
-        when(repository.findAllByCategory(question.getCategory().toString())).thenReturn(Flux.just(question));
+        when(repository.findByUserId(question.getUserId())).thenReturn(Flux.just(question));
 
-        StepVerifier.create(useCase.apply(question.getCategory().toString()))
+        StepVerifier.create(ownerListUseCase.apply(question.getUserId()))
                 .expectNextMatches(questionDTO -> {
                     assert questionDTO.getUserId().equals("xxxx");
                     assert questionDTO.getCategory().equals(Category.SCIENCES);
@@ -52,6 +48,8 @@ class FindAllByCategoryUseCaseTest {
                     return true;
                 })
                 .verifyComplete();
-        verify(repository).findAllByCategory(question.getCategory().toString());
+
+        verify(repository).findByUserId(question.getUserId());
     }
+
 }

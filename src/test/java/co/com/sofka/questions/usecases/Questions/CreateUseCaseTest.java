@@ -1,11 +1,9 @@
-package co.com.sofka.questions.usecases;
+package co.com.sofka.questions.usecases.Questions;
 
-import co.com.sofka.questions.collections.Answer;
 import co.com.sofka.questions.collections.Question;
-import co.com.sofka.questions.model.AnswerDTO;
 import co.com.sofka.questions.model.QuestionDTO;
-import co.com.sofka.questions.reposioties.AnswerRepository;
 import co.com.sofka.questions.reposioties.QuestionRepository;
+import co.com.sofka.questions.usecases.Questions.CreateUseCase;
 import co.com.sofka.questions.utils.Category;
 import co.com.sofka.questions.utils.Type;
 import org.junit.jupiter.api.Assertions;
@@ -16,22 +14,22 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import reactor.core.publisher.Mono;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Objects;
+
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
-class DeleteUseCaseTest {
-
-    @MockBean
-    private AnswerRepository answerRepository;
-    @MockBean
-    private QuestionRepository questionRepository;
+class CreateUseCaseTest {
 
     @SpyBean
-    DeleteUseCase deleteQuestionUseCase;
+    private CreateUseCase createUseCase;
+
+    @MockBean
+    private QuestionRepository repository;
 
     @Test
-    void deleteUseCase(){
+    void createQuestion() {
 
         var questionDT0 = new QuestionDTO("1",
                 "xxxx",
@@ -44,14 +42,15 @@ class DeleteUseCaseTest {
                 Type.OPEN,
                 Category.SCIENCES);
 
+        when(repository.save(Mockito.any())).thenReturn(Mono.just(question));
 
-        Mockito.when(questionRepository.deleteById("xxxx")).thenReturn(Mono.empty());
-        Mockito.when(answerRepository.deleteByQuestionId("xxxx")).thenReturn(Mono.empty());
+        var result = createUseCase.apply(questionDT0);
 
-        var result = deleteQuestionUseCase.apply("xxxx").block();
-        Assertions.assertNull(result);
+        Assertions.assertEquals(Objects.requireNonNull(result.block()),"1");
+        Assertions.assertEquals(result.block(),question.getId());
 
-        Mockito.verify(answerRepository,Mockito.times(1)).deleteByQuestionId("xxxx");
+        Mockito.verify(repository,Mockito.times(1)).save(any());
+
     }
 
 }
