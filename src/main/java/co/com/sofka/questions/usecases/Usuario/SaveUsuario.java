@@ -7,5 +7,5 @@ import javax.validation.Valid;
 
 @FunctionalInterface
 public interface SaveUsuario {
-    Mono<String> apply(@Valid UsuarioDTO usuarioDTO);
+    Mono<UsuarioDTO> apply(@Valid UsuarioDTO usuarioDTO);
 }

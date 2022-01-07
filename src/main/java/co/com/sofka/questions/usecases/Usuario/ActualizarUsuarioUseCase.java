@@ -9,11 +9,11 @@ import reactor.core.publisher.Mono;
 
 @Service
 @Validated
-public class CreateUsuarioUseCase implements SaveUsuario{
+public class ActualizarUsuarioUseCase implements SaveUsuario{
     private final UsuarioRepository usuarioRepository;
     private final MapperUtils mapperUtils;
 
-    public CreateUsuarioUseCase(MapperUtils mapperUtils, UsuarioRepository usuarioRepository) {
+    public ActualizarUsuarioUseCase(MapperUtils mapperUtils, UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
         this.mapperUtils = mapperUtils;
     }
@@ -22,7 +22,7 @@ public class CreateUsuarioUseCase implements SaveUsuario{
     @Override
     public Mono<UsuarioDTO> apply(UsuarioDTO usuarioDTO) {
         return usuarioRepository
-                .save(mapperUtils.mapperToUsuario(null).apply(usuarioDTO))
+                .save(mapperUtils.mapperToUsuario(usuarioDTO.getId()).apply(usuarioDTO))
                 .map(mapperUtils.mapperToUsuarioDTO());
     }
 }

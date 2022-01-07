@@ -1,6 +1,7 @@
 package co.com.sofka.questions.routers.Usuario;
 
 import co.com.sofka.questions.model.UsuarioDTO;
+import co.com.sofka.questions.usecases.Usuario.ActualizarUsuarioUseCase;
 import co.com.sofka.questions.usecases.Usuario.CreateUsuarioUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,21 +12,22 @@ import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
 
-import static org.springframework.web.reactive.function.server.RequestPredicates.*;
-import static org.springframework.web.reactive.function.server.RouterFunctions.*;
+import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
+import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
-public class CreateUsuarioRouter {
+public class ActualizarUsuarioRouter {
     @Bean
-    public RouterFunction<ServerResponse> createUsuario(CreateUsuarioUseCase createUsuarioUseCase){
+    public RouterFunction<ServerResponse> actualizarUsuario(ActualizarUsuarioUseCase actualizarUsuarioUseCase){
 
-        Function<UsuarioDTO, Mono<ServerResponse>> executor = usuarioDTO -> createUsuarioUseCase.apply(usuarioDTO)
+        Function<UsuarioDTO, Mono<ServerResponse>> executor = usuarioDTO -> actualizarUsuarioUseCase.apply(usuarioDTO)
                 .flatMap(result -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .bodyValue(result));
 
         return route(
-                POST("/createUsuario").and(accept(MediaType.APPLICATION_JSON)),
+                POST("/actualizarUsuario").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(UsuarioDTO.class)
                         .flatMap(executor)
         );
