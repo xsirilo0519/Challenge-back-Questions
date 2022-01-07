@@ -37,7 +37,7 @@ class AddAnswerUseCaseTest {
                 Type.OPEN,
                 Category.SCIENCES);
 
-        var answerDTO = new AnswerDTO("1",
+        var answerDTO = new AnswerDTO(null,"1",
                 "xxxx",
                 "Es un lenguaje de programación y otras palabras");
 

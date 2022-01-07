@@ -29,7 +29,7 @@ public class AddAnswerUseCase implements SaveAnswer {
         return getUseCase.apply(answerDTO.getQuestionId()).flatMap(question ->
                 answerRepository.save(mapperUtils.mapperToAnswer().apply(answerDTO))
                         .map(answer -> {
-                            question.getAnswers().add(answerDTO);
+                            question.getAnswers().add(mapperUtils.mapEntityToAnswer().apply(answer));
                             return question;
                         })
         );
