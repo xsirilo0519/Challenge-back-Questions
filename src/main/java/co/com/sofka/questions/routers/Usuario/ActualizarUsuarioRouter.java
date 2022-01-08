@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
 
-import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
+import static org.springframework.web.reactive.function.server.RequestPredicates.PUT;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
@@ -27,7 +27,7 @@ public class ActualizarUsuarioRouter {
                         .bodyValue(result));
 
         return route(
-                POST("/actualizarUsuario").and(accept(MediaType.APPLICATION_JSON)),
+                PUT("/actualizarUsuario").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(UsuarioDTO.class)
                         .flatMap(executor)
         );
