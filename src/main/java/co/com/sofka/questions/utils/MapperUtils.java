@@ -67,6 +67,7 @@ public class MapperUtils {
             usuario.setApellido(usuarioDTO.getApellido());
             usuario.setNombre(usuarioDTO.getNombre());
             usuario.setPath(usuarioDTO.getPath());
+            usuario.setEmail(usuarioDTO.getEmail());
             return usuario;
         };
     }
@@ -77,7 +78,8 @@ public class MapperUtils {
                 usuario.getUid(),
                 usuario.getApellido(),
                 usuario.getNombre(),
-                usuario.getPath()
+                usuario.getPath(),
+                usuario.getEmail()
         );
     }
 

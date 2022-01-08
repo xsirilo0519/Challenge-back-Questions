@@ -24,8 +24,6 @@ public class GetUsuarioByIdUseCase implements Function<String, Mono<UsuarioDTO>>
 
     @Override
     public Mono<UsuarioDTO> apply(String uid) {
-        System.out.println(uid);
-        System.out.println("------------------------");
         return usuarioRepository.findUsuarioByUid(uid).map(mapperUtils.mapperToUsuarioDTO());
     }
 }

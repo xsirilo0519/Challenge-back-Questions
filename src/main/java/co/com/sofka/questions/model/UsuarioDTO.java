@@ -11,16 +11,26 @@ public class UsuarioDTO {
     private String apellido;
     @NotBlank
     private String path;
+    private String email;
 
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(String id, String uid, String nombre, String apellido, String path) {
+    public UsuarioDTO(String id, String uid, String nombre, String apellido, String path,String email) {
         this.id = id;
         this.uid = uid;
         this.nombre = nombre;
         this.apellido = apellido;
         this.path = path;
+        this.email=email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getId() {

@@ -21,8 +21,8 @@ public class CreateUsuarioUseCase implements SaveUsuario{
 
     @Override
     public Mono<UsuarioDTO> apply(UsuarioDTO usuarioDTO) {
-        return usuarioRepository
-                .save(mapperUtils.mapperToUsuario(null).apply(usuarioDTO))
+        return usuarioRepository.findUsuarioByUid(usuarioDTO.getUid())
+                .switchIfEmpty(usuarioRepository.save(mapperUtils.mapperToUsuario(null).apply(usuarioDTO)))
                 .map(mapperUtils.mapperToUsuarioDTO());
     }
 }
