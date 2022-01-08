@@ -40,7 +40,7 @@ public class ListFavoriteUseCase implements Function<String, Flux<QuestionDTO>> 
                             if(answers.getId()!=null){
                                 question.setFavorite(true);
                             }else{
-                                question.setFavorite(true);
+                                question.setFavorite(false);
                             }
                             return question;
                         }
