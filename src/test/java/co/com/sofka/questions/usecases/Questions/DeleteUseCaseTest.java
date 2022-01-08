@@ -33,13 +33,13 @@ class DeleteUseCaseTest {
         var questionDT0 = new QuestionDTO("1",
                 "xxxx",
                 "What is java?",
-                Type.OPEN, Category.SCIENCES,"hola",false);
+                Type.OPEN, Category.SCIENCES,"hola");
 
         var question = new Question("1",
                 "xxxx",
                 "What is java?",
                 Type.OPEN,
-                Category.SCIENCES,"hola",false);
+                Category.SCIENCES,"hola");
 
 
         Mockito.when(questionRepository.deleteById("xxxx")).thenReturn(Mono.empty());

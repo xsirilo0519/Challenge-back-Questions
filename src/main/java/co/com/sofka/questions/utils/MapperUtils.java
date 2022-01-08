@@ -61,7 +61,6 @@ public class MapperUtils {
             question.setUserId(updateQuestion.getUserId());
             question.setType(updateQuestion.getType());
             question.setEmail(updateQuestion.getEmail());
-            question.setFavorite(updateQuestion.getFavorite());
             return question;
         };
     }
@@ -73,8 +72,7 @@ public class MapperUtils {
                 entity.getQuestion(),
                 entity.getType(),
                 entity.getCategory(),
-                entity.getEmail(),
-                entity.getFavorite()
+                entity.getEmail()
         );
     }
 

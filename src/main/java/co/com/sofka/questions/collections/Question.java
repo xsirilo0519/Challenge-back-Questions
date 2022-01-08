@@ -15,28 +15,19 @@ public class Question {
     private Type type;
     private Category category;
     private String email;
-    private Boolean favorite;
 
     public Question() {
     }
 
-    public Question(String id, String userId, String question, Type type, Category category,String email,Boolean favorite) {
+    public Question(String id, String userId, String question, Type type, Category category,String email ) {
         this.id = id;
         this.userId = userId;
         this.question = question;
         this.type = type;
         this.category = category;
         this.email=email;
-        this.favorite=favorite;
     }
 
-    public Boolean getFavorite() {
-        return favorite;
-    }
-
-    public void setFavorite(Boolean favorite) {
-        this.favorite = favorite;
-    }
 
     public String getEmail() {
         return email;

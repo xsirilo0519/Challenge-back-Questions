@@ -35,7 +35,7 @@ class AddAnswerUseCaseTest {
                 "xxxx",
                 "What is java?",
                 Type.OPEN,
-                Category.SCIENCES,"hola",false);
+                Category.SCIENCES,"hola");
 
         var answerDTO = new AnswerDTO(null,"1",
                 "xxxx",

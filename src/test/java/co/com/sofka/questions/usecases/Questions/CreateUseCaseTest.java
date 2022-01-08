@@ -33,13 +33,13 @@ class CreateUseCaseTest {
         var questionDT0 = new QuestionDTO("1",
                 "xxxx",
                 "What is java?",
-                Type.OPEN, Category.SCIENCES,"hola",false);
+                Type.OPEN, Category.SCIENCES,"hola");
 
         var question = new Question("1",
                 "xxxx",
                 "What is java?",
                 Type.OPEN,
-                Category.SCIENCES,"hola",false);
+                Category.SCIENCES,"hola");
 
         when(repository.save(Mockito.any())).thenReturn(Mono.just(question));
 

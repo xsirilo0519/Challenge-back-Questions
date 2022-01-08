@@ -23,7 +23,7 @@ public class QuestionDTO {
     private Category category;
     @NotBlank
     private String email;
-    private Boolean favorite;
+    private FavoriteDTO favorite;
     private List<AnswerDTO> answers;
 
 
@@ -31,30 +31,28 @@ public class QuestionDTO {
 
     }
 
-    public QuestionDTO(String userId, String question, Type type, Category category,String email,Boolean favorite) {
+    public QuestionDTO(String userId, String question, Type type, Category category,String email) {
         this.userId = userId;
         this.question = question;
         this.type = type;
         this.category = category;
         this.email=email;
-        this.favorite=favorite;
     }
 
-    public QuestionDTO(String id, String userId, String question, Type type, Category category,String email,Boolean favorite) {
+    public QuestionDTO(String id, String userId, String question, Type type, Category category,String email) {
         this.id = id;
         this.userId = userId;
         this.question = question;
         this.type = type;
         this.category = category;
         this.email=email;
-        this.favorite=favorite;
     }
 
-    public Boolean getFavorite() {
+    public FavoriteDTO getFavorite() {
         return favorite;
     }
 
-    public void setFavorite(Boolean favorite) {
+    public void setFavorite(FavoriteDTO favorite) {
         this.favorite = favorite;
     }
 

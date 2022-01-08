@@ -1,6 +1,7 @@
 package co.com.sofka.questions.usecases.Questions;
 
 import co.com.sofka.questions.collections.Favorite;
+import co.com.sofka.questions.model.FavoriteDTO;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.repositories.FavoriteRepository;
 import co.com.sofka.questions.repositories.QuestionRepository;
@@ -31,17 +32,21 @@ public class ListFavoriteUseCase implements Function<String, Flux<QuestionDTO>> 
                 .flatMap(mapQuestionAggregate(id));
     }
     private Function<QuestionDTO, Mono<QuestionDTO>> mapQuestionAggregate(String id) {
+
         return questionDTO ->
+
                 Mono.just(questionDTO).zipWith(
                         favoriteRepository.findFavoriteByUidAndQuestionid(id,questionDTO.getId())
                                 .switchIfEmpty(Mono.just(new Favorite()))
                                 .map(mapperUtils.mapperToFavoriteDTO()),
-                        (question, answers) -> {
-                            if(answers.getId()!=null){
-                                question.setFavorite(true);
-                            }else{
-                                question.setFavorite(false);
+                        (question, favoriteDTO) -> {
+                            System.out.println("hola");
+                            System.out.println(favoriteDTO);
+
+                            if(favoriteDTO.getId()!=null) {
+                                question.setFavorite(favoriteDTO);
                             }
+
                             return question;
                         }
                 );
