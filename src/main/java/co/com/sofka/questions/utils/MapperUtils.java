@@ -76,8 +76,8 @@ public class MapperUtils {
         return usuario -> new UsuarioDTO(
                 usuario.getId(),
                 usuario.getUid(),
-                usuario.getApellido(),
                 usuario.getNombre(),
+                usuario.getApellido(),
                 usuario.getPath(),
                 usuario.getEmail()
         );
