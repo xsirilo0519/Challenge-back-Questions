@@ -1,9 +1,11 @@
 package co.com.sofka.questions.utils;
 
 import co.com.sofka.questions.collections.Answer;
+import co.com.sofka.questions.collections.Favorite;
 import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.collections.Usuario;
 import co.com.sofka.questions.model.AnswerDTO;
+import co.com.sofka.questions.model.FavoriteDTO;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.model.UsuarioDTO;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,28 @@ import java.util.function.Function;
 
 @Component
 public class MapperUtils {
+
+    public Function<FavoriteDTO, Favorite> mapperToFavorite() {
+        return favoriteDTO -> {
+            var favorite = new Favorite();
+            favorite.setId(favoriteDTO.getId());
+            favorite.setUid(favoriteDTO.getUid());
+            favorite.setQuestionid(favoriteDTO.getQuestionid());
+            return favorite;
+        };
+    }
+
+
+    public Function<Favorite, FavoriteDTO> mapperToFavoriteDTO() {
+        return favorite -> {
+            var favoritedto = new FavoriteDTO();
+            favoritedto.setId(favorite.getId());
+            favoritedto.setUid(favorite.getUid());
+            favoritedto.setQuestionid(favorite.getQuestionid());
+            return favoritedto;
+        };
+    }
+
 
     public Function<AnswerDTO, Answer> mapperToAnswer() {
         return updateAnswer -> {
@@ -25,6 +49,8 @@ public class MapperUtils {
         };
     }
 
+
+
     public Function<QuestionDTO, Question> mapperToQuestion(String id) {
         return updateQuestion -> {
             var question = new Question();
@@ -35,6 +61,7 @@ public class MapperUtils {
             question.setUserId(updateQuestion.getUserId());
             question.setType(updateQuestion.getType());
             question.setEmail(updateQuestion.getEmail());
+            question.setFavorite(updateQuestion.getFavorite());
             return question;
         };
     }
@@ -46,7 +73,8 @@ public class MapperUtils {
                 entity.getQuestion(),
                 entity.getType(),
                 entity.getCategory(),
-                entity.getEmail()
+                entity.getEmail(),
+                entity.getFavorite()
         );
     }
 

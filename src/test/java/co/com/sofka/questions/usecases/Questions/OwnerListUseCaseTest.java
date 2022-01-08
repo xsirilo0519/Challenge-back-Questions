@@ -34,7 +34,7 @@ class OwnerListUseCaseTest {
                 "xxxx",
                 "What is java?",
                 Type.OPEN,
-                Category.SCIENCES,"hola");
+                Category.SCIENCES,"hola",false);
 
         when(repository.findByUserId(question.getUserId())).thenReturn(Flux.just(question));
 
