@@ -33,13 +33,13 @@ class UpdateUseCaseTest {
                 "xxxx",
                 "What is java?",
                 Type.OPEN,
-                Category.SCIENCES);
+                Category.SCIENCES,"hola");
 
         var question = new Question("11",
                 "xxxx",
                 "What is java?",
                 Type.OPEN,
-                Category.SCIENCES);
+                Category.SCIENCES,"hola");
 
 
         when(repository.save(Mockito.any())).thenReturn(Mono.just(question));

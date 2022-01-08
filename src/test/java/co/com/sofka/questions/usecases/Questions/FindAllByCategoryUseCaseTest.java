@@ -39,7 +39,7 @@ class FindAllByCategoryUseCaseTest {
                 "xxxx",
                 "What is java?",
                 Type.OPEN,
-                Category.SCIENCES);
+                Category.SCIENCES,"hola");
 
         when(repository.findAllByCategory(question.getCategory().toString())).thenReturn(Flux.just(question));
 

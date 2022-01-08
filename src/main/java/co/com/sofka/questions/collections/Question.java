@@ -14,16 +14,26 @@ public class Question {
     private String question;
     private Type type;
     private Category category;
+    private String email;
 
     public Question() {
     }
 
-    public Question(String id, String userId, String question, Type type, Category category) {
+    public Question(String id, String userId, String question, Type type, Category category,String email) {
         this.id = id;
         this.userId = userId;
         this.question = question;
         this.type = type;
         this.category = category;
+        this.email=email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getId() {
