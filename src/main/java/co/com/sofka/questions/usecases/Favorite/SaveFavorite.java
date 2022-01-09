@@ -9,6 +9,6 @@ import javax.validation.Valid;
 
 @FunctionalInterface
 public interface SaveFavorite {
-    Mono<String> apply(@Valid FavoriteDTO favoriteDTO);
+    Mono<FavoriteDTO> apply(@Valid FavoriteDTO favoriteDTO);
 
 }

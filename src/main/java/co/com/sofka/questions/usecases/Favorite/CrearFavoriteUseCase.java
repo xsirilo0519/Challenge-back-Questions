@@ -24,10 +24,10 @@ public class CrearFavoriteUseCase implements SaveFavorite {
     }
 
     @Override
-    public Mono<String> apply(FavoriteDTO favoriteDTO) {
+    public Mono<FavoriteDTO> apply(FavoriteDTO favoriteDTO) {
         return favoriteRepository
                 .save(mapperUtils.mapperToFavorite().apply(favoriteDTO))
-                .map(Favorite::getId);
+                .map(mapperUtils.mapperToFavoriteDTO());
     }
 
 }

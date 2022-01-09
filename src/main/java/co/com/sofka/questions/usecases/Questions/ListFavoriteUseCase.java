@@ -36,12 +36,10 @@ public class ListFavoriteUseCase implements Function<String, Flux<QuestionDTO>> 
         return questionDTO ->
 
                 Mono.just(questionDTO).zipWith(
-                        favoriteRepository.findFavoriteByUidAndQuestionid(id,questionDTO.getId())
+                        favoriteRepository.findFirstByUidAndQuestionid(id,questionDTO.getId())
                                 .switchIfEmpty(Mono.just(new Favorite()))
                                 .map(mapperUtils.mapperToFavoriteDTO()),
                         (question, favoriteDTO) -> {
-                            System.out.println("hola");
-                            System.out.println(favoriteDTO);
 
                             if(favoriteDTO.getId()!=null) {
                                 question.setFavorite(favoriteDTO);

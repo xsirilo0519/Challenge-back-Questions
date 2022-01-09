@@ -7,5 +7,5 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface FavoriteRepository extends ReactiveCrudRepository<Favorite,String> {
-    Mono<Favorite> findFavoriteByUidAndQuestionid (String uid,String questionid);
+    Mono<Favorite> findFirstByUidAndQuestionid (String uid,String questionid);
 }
