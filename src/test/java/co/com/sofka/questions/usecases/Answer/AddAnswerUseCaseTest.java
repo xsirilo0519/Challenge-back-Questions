@@ -1,5 +1,6 @@
 package co.com.sofka.questions.usecases.Answer;
 
+import co.com.sofka.questions.Service.SendMailService;
 import co.com.sofka.questions.collections.Answer;
 import co.com.sofka.questions.model.AnswerDTO;
 import co.com.sofka.questions.model.QuestionDTO;
@@ -10,12 +11,16 @@ import co.com.sofka.questions.utils.Type;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import reactor.core.publisher.Mono;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -28,6 +33,11 @@ class AddAnswerUseCaseTest {
 
     @MockBean
     AnswerRepository answerRepository;
+
+    @MockBean
+    SendMailService sendMailService;
+
+
 
     @Test
     void addAnswerTest() {
@@ -48,6 +58,9 @@ class AddAnswerUseCaseTest {
 
         when(answerRepository.save(any())).thenReturn(Mono.just(answer));
         when(getUseCase.apply(any())).thenReturn(Mono.just(question));
+        when(sendMailService.sendMail(anyString(),anyString(),anyString())).thenReturn(Mono.just("¡Send!"));
+
+
 
         var questionDTO = addAnswerUseCase.apply(answerDTO);
         var resultQuestionDTO = questionDTO.block();
@@ -59,5 +72,7 @@ class AddAnswerUseCaseTest {
         Assertions.assertEquals(resultQuestionDTO.getAnswers().get(0).getAnswer(),answerDTO.getAnswer());
 
         Mockito.verify(answerRepository,Mockito.times(1)).save(any());
+        Mockito.verify(sendMailService,Mockito.times(1)).sendMail( "hola",    "Han respondido a tu pregunta: What is java?",  "Respuesta: \nEs un lenguaje de programación y otras palabras");
+
     }
 }

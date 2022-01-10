@@ -10,12 +10,14 @@ import reactor.core.publisher.Mono;
 @Validated
 public class SendMailService {
 
-    @Autowired
-    private JavaMailSender javaMailSender;
+
+    private final JavaMailSender javaMailSender;
+
 
     private final String FROM = "sendemail0519@gmail.com";
 
-    public SendMailService() {
+    public SendMailService(JavaMailSender javaMailSender){
+        this.javaMailSender=javaMailSender;
     }
 
     public Mono<String> sendMail(String to, String subject, String body){
@@ -23,7 +25,6 @@ public class SendMailService {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 
         simpleMailMessage.setFrom(FROM);
-        System.out.println(to);
         simpleMailMessage.setTo(to);
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(body);
